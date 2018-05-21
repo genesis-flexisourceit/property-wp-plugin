@@ -20,3 +20,13 @@ if ( !function_exists( 'add_action' ) ) {
 }
 
 define('PLUGIN_NAME_VERSION', '1.0.0');
+
+require_once plugin_dir_path( __FILE__ ) . 'classes/setting-loader.php';
+
+if(class_exists(SettingLoader::class)) {
+	$settingLoader = new SettingLoader();
+}
+
+register_activation_hook(__FILE__, [$settingLoader, 'activate']);
+
+register_deactivation_hook(__FILE__, [$settingLoader, 'deactivate']);
